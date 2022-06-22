@@ -1,0 +1,17 @@
+#include <iostream>
+#include <thread>
+
+using namespace std;
+void call_from_thread() {
+	cout << "Hello, world\n";
+}
+
+int main() {
+	thread t1(call_from_thread);
+	t1.join();
+
+	thread t2(call_from_thread);
+	t2.join();
+
+	return 0;
+}

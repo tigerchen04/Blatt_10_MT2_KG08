@@ -11,10 +11,10 @@ void Ausgabe() {
 }
 int main() {
 
+	thr = thread(Ausgabe);
 	thread::id idD = thr.get_id();
 	cout << "Informatik 2 -Betriebssysteme - Praktikum 1 Aufgabe 2\n";
 	cout << "Die Thread ID lautet: " << thr.get_id();
-	thr = thread(Ausgabe);
 	thr.join();
 
 	system("pause");

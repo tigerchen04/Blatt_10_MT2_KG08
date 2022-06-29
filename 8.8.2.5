@@ -1,0 +1,62 @@
+#include <iostream>
+#include <chrono>
+#include <thread>
+
+using namespace std;
+using namespace chrono;
+
+// Funktion um eine Fibonacci-Folge zu bererchnen
+int fibonacci(int n)
+
+{
+	if (n < 3) return 1;
+	return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+void task() {
+	// Zwei Zeitpunkte zur Zeitmessung
+	time_point<system_clock> start, end;
+
+	// start-Zeitpunkt die aktulle Uhrzeit zuweisen
+	start = system_clock::now();
+	// Fibonaccizahlen berechnen
+	int result = fibonacci(42);
+	// end-Zeitpunkt die aktuelle Uhrzeit zuweisen
+	end = system_clock::now();
+
+	cout << "thread: " << duration_cast<seconds>(end - start).count() << endl;
+}
+
+int main()
+{
+	//Thread starten:
+	thread t1(task);
+
+	// Zwei Zeitpunkte zur Zeitmessung
+	time_point<system_clock> start, end;
+
+	// start-Zeitpunkt die aktulle Uhrzeit zuweisen
+	start = system_clock::now();
+
+	// Fibonaccizahlen berechnen
+	int result = fibonacci(42);
+
+	// end-Zeitpunkt die aktuelle Uhrzeit zuweisen
+	end = system_clock::now();
+
+	//Zusammenführen:
+	t1.join();
+
+	cout << "main: " << result << endl;
+
+	// Berechnung der benoetigten Sekunden
+	int elapsed_seconds = duration_cast<seconds>(end - start).count();
+	// Ausgabe
+	cout << "finished computation, elapsed time: "
+		<< elapsed_seconds << "s" << endl;
+	
+	// Blockieren des Prozesses
+	system("pause");
+
+	return 0;
+}

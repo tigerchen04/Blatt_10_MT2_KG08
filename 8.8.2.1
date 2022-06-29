@@ -1,0 +1,16 @@
+#include <thread>
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+	unsigned int Anzahl_Prozessorkerne;
+
+	Anzahl_Prozessorkerne = thread::hardware_concurrency();
+
+	cout << "Informatik 2 - Betriebssysteme - Praktikum 1 Aufgabe 1\n";
+	cout << "Im System wurden ungefaehr " << Anzahl_Prozessorkerne << " Prozessorkerne gefunden.\n";
+
+	system("pause");
+}
